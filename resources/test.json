@@ -1,0 +1,60 @@
+{
+  "countries": ["turkey", "india", "none"],
+  "turkey" :
+  {
+   "name" : "turkey",
+    "color": "white",
+    "territory": {
+      "one":
+      {
+        "name": "Turkey",
+        "symbol": "TUR",
+        "connections": ["BS"]
+      },
+      "two":
+      {
+        "name": "Black Sea",
+        "symbol": "BS",
+        "connections": ["TUR", "FRA"]
+      }
+    }
+  },
+  "india" :
+  {
+    "name" : "India",
+    "color": "blue",
+    "territory": {
+      "one":
+      {
+        "name": "United Kingdom",
+        "symbol": "UK",
+        "connections": ["NIR", "FRA"]
+      },
+      "two":
+      {
+        "name": "northern ireland",
+        "symbol": "NIR",
+        "connections": ["UK", "FRA", "GER"]
+      }
+    }
+  },
+  "none" :
+  {
+    "name" : "",
+    "color": "tan",
+    "territory": {
+      "one":
+      {
+        "name": "france",
+        "symbol": "FRA",
+        "connections": ["GER", "BS", "NIR"]
+      },
+      "two":
+      {
+        "name": "Germany",
+        "symbol": "GER",
+        "connections": ["NIR", "FRA"]
+      }
+    }
+  }
+}
