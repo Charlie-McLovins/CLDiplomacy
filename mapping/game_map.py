@@ -3,14 +3,14 @@ import enum
 from mapping.utils.parser import Parser
 
 
-class Map:
+class Game_Map:
     def __init__(self, path):
         self.parser = Parser(path)
         self.countries = []
         self.tiles = []
         self._load()
-        # for t in self.tiles:
-        #     print(t)
+        for t in self.tiles:
+            print(t)
         # for c in self.countries:
         #     print(c)
 
@@ -24,7 +24,14 @@ class Map:
             territory = []
             for n in v["territory"]:
                 territory.append(self.get_tile(n))
-            self.countries.append(Country(v["display_name"], v["color"], territory))
+            units = v["units"]
+            depots = v["depots"]
+            home_depots = v["home_depots"]
+            self.countries.append(Country(v["display_name"], v["color"], territory, units, depots, home_depots))
+
+        for country in self.countries:
+            for t in country.territory:
+                t.set_owner(country)
 
     def get_tile(self, name):
         for tile in self.tiles:
@@ -48,10 +55,13 @@ class Map:
 
 
 class Country:
-    def __init__(self, display_name, color, territory):
+    def __init__(self, display_name, color, territory, units, depots, home_depots):
         self.display_name = display_name
         self.color = color
         self.territory = territory
+        self.units = units
+        self.depots = depots
+        self.home_depots = home_depots
 
     def __repr__(self):
         return f"Name: {self.display_name}, Color: {self.color}, Territory: {self.territory}"
@@ -84,7 +94,7 @@ class Tile:
             f"Name: {self.name}, Symbol: {self.sym}, Tile Type: {self.tile_type}, Connections: {self.connections}")
         if self.owner is not None:
             info += str(
-                f"\nOwner: {self.owner}, Color: {self.color}, Unit: {self.unit}, Supply Depot: {self.supply_depot}, Home Depot{self.home_depot}")
+                f"\nOwner: {self.owner}, Color: {self.color}, Unit: {self.unit}, Supply Depot: {self.supply_depot}, Home Depot: {self.home_depot}")
 
         return info
 
@@ -102,10 +112,17 @@ class Tile:
             return connection in self.connections
         return connection.sym in self.connections
 
-    def set_owner(self, country):
-        self._set_owner(country.name, country.color, Unit.Empty, False)
+    def set_owner(self, country: Country):
+        unit = Unit_Type.Empty
+        for unit in country.units:
+            for k, v in unit.items():
+                if self.name == k:
+                    unit = Unit_Type(v)
+        depot = self.name in country.depots
+        home_depot = self.name in country.home_depots
+        self._set_owner(country.display_name, country.color, unit, depot, home_depot)
 
-    def _set_owner(self, owner, color, unit, supply_depot, home_depot=False):
+    def _set_owner(self, owner, color, unit, supply_depot=False, home_depot=False):
         self.owner = owner
         self.color = color
         self.unit = unit
@@ -121,8 +138,8 @@ class Tile_Type(enum.Enum):
     Coast = "coast"
     Sea = "sea"
 
-
-class Unit(enum.Enum):
+# TODO remove type empty and replace with None
+class Unit_Type(enum.Enum):
     Empty = "empty"
     Army = "army"
     Fleet = "fleet"

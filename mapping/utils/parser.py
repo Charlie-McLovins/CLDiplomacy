@@ -1,5 +1,5 @@
 import json
-from mapping import map
+from mapping import game_map
 
 
 class Parser:
@@ -12,7 +12,6 @@ class Parser:
     def load(self):
         with open(self.path) as file:
             self.data = json.loads(file.read())
-        #self.debug()
         self.countries = self.data["countries"]
 
     def get_data(self):

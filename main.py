@@ -1,15 +1,19 @@
-import game.player
-from mapping.map import Map
+from game.player import Player
+from game.unit_manager import Unit_Manager
+from mapping.game_map import Game_Map
 from random import Random
 
 
 def main():
-    map = Map("resources\\test2.json")
-    players = init_players(map)
+    game_map = Game_Map("resources\\test2.json")
+    players = init_players(game_map)
+    unit_manager = Unit_Manager(game_map, players)
+
+
     selected_country = None
 
     while selected_country is None:
-        countries = map.countries
+        countries = game_map.countries
         countries_str = "Available Countries are: "
         for c in countries:
             countries_str += f"{c.display_name}, "
@@ -17,7 +21,7 @@ def main():
         selection = input("Please select a Country: ")
         if selection in ["quit", "q", ""]:
             return
-        selected_country = map.get_country(selection)
+        selected_country = game_map.get_country(selection)
 
     print(f"You have selected: {selected_country.display_name}")
     tile = Random().choice(selected_country.territory)
@@ -25,7 +29,7 @@ def main():
         connections = tile.get_connections()
         f_connections = ""
         for c in connections:
-            t = map.get_tile(c)
+            t = game_map.get_tile(c)
             f_connections += f"{t.name} ({t.sym}), "
         f_connections = f_connections[0:len(f_connections) - 2]
         print(f"Currently located in: {tile.name}\n"
@@ -37,18 +41,18 @@ def main():
             print("this is where help should go")
             continue
         if tile.check_connection(user_input):
-            tile = map.get_tile(user_input)
+            tile = game_map.get_tile(user_input)
             continue
         else:
             print("Tile or command unrecognized; Try again")
 
 
-def init_players(map):
+def init_players(game_map: Game_Map):
     players = []
-    for country in map.countries:
+    for country in game_map.countries:
         if country.display_name == "":
             continue
-        players.append(game.player.Player(country.display_name, country.color, country.territory))
+        players.append(Player(country.display_name, country.color, country.territory))
     return players
 
 if __name__ == "__main__":

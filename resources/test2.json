@@ -50,19 +50,28 @@
     {
       "display_name": "Turkey",
       "color": "red",
-      "territory": ["Turkey", "Black Sea"]
+      "territory": ["Turkey", "Black Sea"],
+      "units": [{"Turkey" :  "fleet"}],
+      "depots": ["Turkey"],
+      "home_depots": ["Turkey"]
     },
     "Britain":
     {
       "display_name": "Britain",
       "color": "blue",
-      "territory": ["United Kingdom", "Northern Ireland"]
+      "territory": ["United Kingdom", "Northern Ireland"],
+      "units": [],
+      "depots": ["United Kingdom, Northern Ireland"],
+      "home_depots": ["United Kingdom"]
     },
     "None":
     {
       "display_name": "",
       "color": "",
-      "territory": ["France", "Germany"]
+      "territory": ["France", "Germany"],
+      "units": [],
+      "depots": ["Germany"],
+      "home_depots": []
     }
   }
 }
