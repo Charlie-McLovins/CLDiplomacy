@@ -40,6 +40,12 @@ class Map:
             tiles.append(t.name)
         return tiles
 
+    def get_country(self, country):
+        for c in self.countries:
+            if c == country:
+                return c
+        return None
+
 
 class Country:
     def __init__(self, display_name, color, territory):
@@ -49,6 +55,12 @@ class Country:
 
     def __repr__(self):
         return f"Name: {self.display_name}, Color: {self.color}, Territory: {self.territory}"
+
+    def __eq__(self, other):
+        if type(other) is Country:
+            return other.display_name == self.display_name
+        else:
+            return other == self.display_name
 
 
 class Tile:
@@ -99,6 +111,9 @@ class Tile:
         self.unit = unit
         self.supply_depot = supply_depot
         self.home_depot = home_depot
+
+    def get_owner(self):
+        return self.owner
 
 
 class Tile_Type(enum.Enum):
