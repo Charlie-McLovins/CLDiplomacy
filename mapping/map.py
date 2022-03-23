@@ -9,10 +9,10 @@ class Map:
         self.countries = []
         self.tiles = []
         self._load()
-        for t in self.tiles:
-            print(t)
-        for c in self.countries:
-            print(c)
+        # for t in self.tiles:
+        #     print(t)
+        # for c in self.countries:
+        #     print(c)
 
     def _load(self):
         tiles = self.parser.get_attribute("tiles")
@@ -30,7 +30,15 @@ class Map:
         for tile in self.tiles:
             if tile.name == name:
                 return tile
+            if tile.sym == name:
+                return tile
         return None
+
+    def get_tiles(self):
+        tiles = []
+        for t in self.tiles:
+            tiles.append(t.name)
+        return tiles
 
 
 class Country:
@@ -77,8 +85,9 @@ class Tile:
     def get_connections(self):
         return self.connections
 
-    # TODO Make a check_connection that operates on a string instead of a tile object
     def check_connection(self, connection):
+        if isinstance(connection, str):
+            return connection in self.connections
         return connection.sym in self.connections
 
     def set_owner(self, country):
