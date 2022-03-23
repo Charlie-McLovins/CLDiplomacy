@@ -1,2 +1,6 @@
 
 .idea/
+
+mapping/__pycache__/
+
+mapping/utils/__pycache__/

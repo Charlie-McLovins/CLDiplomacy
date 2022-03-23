@@ -1,0 +1,68 @@
+{
+  "tiles":
+  {
+    "Turkey":
+    {
+      "name": "Turkey",
+      "symbol": "TUR",
+      "tile_type": "costal",
+      "connections": ["BS"]
+    },
+    "Black Sea":
+    {
+      "name": "Black Sea",
+      "symbol": "BS",
+      "tile_type": "sea",
+      "connections": ["TUR", "FRA"]
+    },
+    "United Kingdom":
+    {
+      "name": "United Kingdom",
+      "symbol": "UK",
+      "tile_type": "coastal",
+      "connections": ["NIR", "FRA"]
+    },
+    "Northern Ireland":
+    {
+      "name": "Northern Ireland",
+      "symbol": "NIR",
+      "tile_type": "coastal",
+      "connections": ["UK", "FRA", "GER"]
+    },
+    "France":
+    {
+      "name": "France",
+      "symbol": "FRA",
+      "tile_type": "coastal",
+      "connections": ["GER", "BS", "NIR"]
+    },
+    "Germany":
+    {
+      "name": "Germany",
+      "symbol": "GER",
+      "tile_type": "coastal",
+      "connections": ["NIR", "FRA"]
+    }
+  },
+  "countries":
+  {
+    "Turkey":
+    {
+      "display_name": "Turkey",
+      "color": "red",
+      "territory": ["Turkey", "Black Sea"]
+    },
+    "Britain":
+    {
+      "display_name": "Britain",
+      "color": "blue",
+      "territory": ["United Kingdom", "Northern Ireland"]
+    },
+    "None":
+    {
+      "display_name": "",
+      "color": "",
+      "territory": ["France", "Germany"]
+    }
+  }
+}
