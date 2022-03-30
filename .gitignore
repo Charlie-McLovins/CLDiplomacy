@@ -2,3 +2,9 @@
 .idea/
 
 game/__pycache__/
+
+build/
+
+CLDiplomacy.egg-info/
+
+*.pyc
