@@ -6,8 +6,8 @@ from game.unit import Unit, Unit_Type
 class Game_Map:
     def __init__(self):
         self.tiles = []
-        self.players = []
-        self.units = []
+        # self.players = []
+        # self.units = []
 
         # TODO load from map file
         self.tiles.append(Tile("One", "1", Tile_Type.Land, True))
@@ -20,9 +20,9 @@ class Game_Map:
         self.tiles[2].connections = [self.tiles[1], self.tiles[3]]
         self.tiles[3].connections = [self.tiles[0], self.tiles[2]]
 
-        self.players.append(Player([
-            Unit(Unit_Type.Army, self.tiles[0])
-        ]))
+        # self.players.append(Player([
+        #     Unit(Unit_Type.Army, self.tiles[0])
+        # ]))
 
     def __repr__(self):
         string = ""
@@ -30,9 +30,9 @@ class Game_Map:
         for tile in self.tiles:
             string += f"{tile}\n"
 
-        string += "\n\n\n"
+        # string += "\n\n\n"
 
-        for player in self.players:
-            string += f"{player}\n"
+        # for player in self.players:
+        #     string += f"{player}\n"
 
         return string
